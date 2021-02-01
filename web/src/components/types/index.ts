@@ -1,6 +1,8 @@
 import { ElementType, ReactNode } from 'react'
 
 export enum Variant {
+    Primary = 'primary',
+    Secondary = 'secondary',
     Success = 'success',
     Danger = 'danger',
     Warning = 'warning',
