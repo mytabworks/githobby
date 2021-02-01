@@ -1,0 +1,624 @@
+@import '@styles/mixins.scss';
+
+@mixin level-up($label, $style, $label2: false) {
+	@if $label2 {
+		.#{$label}-0,
+		.#{$label2}-0 {
+			#{$style}: 0 !important;
+		}
+
+		.#{$label}-1,
+		.#{$label2}-1 {
+			#{$style}: 0.25rem !important;
+		}
+
+		.#{$label}-2,
+		.#{$label2}-2 {
+			#{$style}: 0.5rem !important;
+		}
+
+		.#{$label}-3,
+		.#{$label2}-3 {
+			#{$style}: 1rem !important;
+		}
+
+		.#{$label}-4,
+		.#{$label2}-4 {
+			#{$style}: 1.5rem !important;
+		}
+
+		.#{$label}-5,
+		.#{$label2}-5 {
+			#{$style}: 3rem !important;
+		}
+
+		.#{$label}-auto,
+		.#{$label2}-auto {
+			#{$style}: auto !important;
+		}
+	} @else {
+		.#{$label}-0 {
+			#{$style}: 0 !important;
+		}
+
+		.#{$label}-1 {
+			#{$style}: 0.25rem !important;
+		}
+
+		.#{$label}-2 {
+			#{$style}: 0.5rem !important;
+		}
+
+		.#{$label}-3 {
+			#{$style}: 1rem !important;
+		}
+
+		.#{$label}-4 {
+			#{$style}: 1.5rem !important;
+		}
+
+		.#{$label}-5 {
+			#{$style}: 3rem !important;
+		}
+
+		.#{$label}-auto {
+			#{$style}: auto !important;
+		}
+	}
+}
+
+@include level-up('m', 'margin', false);
+
+@include level-up('ml', 'margin-left', 'mx');
+
+@include level-up('mr', 'margin-right', 'mx');
+
+@include level-up('mt', 'margin-top', 'my');
+
+@include level-up('mb', 'margin-bottom', 'my');
+
+@include media-min-sm {
+	@include level-up('m-sm', 'margin', false);
+
+	@include level-up('ml-sm', 'margin-left', 'mx-sm');
+
+	@include level-up('mr-sm', 'margin-right', 'mx-sm');
+
+	@include level-up('mt-sm', 'margin-top', 'my-sm');
+
+	@include level-up('mb-sm', 'margin-bottom', 'my-sm');
+}
+
+@include media-min-md {
+	@include level-up('m-md', 'margin', false);
+
+	@include level-up('ml-md', 'margin-left', 'mx-md');
+
+	@include level-up('mr-md', 'margin-right', 'mx-md');
+
+	@include level-up('mt-md', 'margin-top', 'my-md');
+
+	@include level-up('mb-md', 'margin-bottom', 'my-md');
+}
+
+@include media-min-lg {
+	@include level-up('m-lg', 'margin', false);
+
+	@include level-up('ml-lg', 'margin-left', 'mx-lg');
+
+	@include level-up('mr-lg', 'margin-right', 'mx-lg');
+
+	@include level-up('mt-lg', 'margin-top', 'my-lg');
+
+	@include level-up('mb-lg', 'margin-bottom', 'my-lg');
+}
+
+@include media-min-xl {
+	@include level-up('m-xl', 'margin', false);
+
+	@include level-up('ml-xl', 'margin-left', 'mx-xl');
+
+	@include level-up('mr-xl', 'margin-right', 'mx-xl');
+
+	@include level-up('mt-xl', 'margin-top', 'my-xl');
+
+	@include level-up('mb-xl', 'margin-bottom', 'my-xl');
+}
+
+@include level-up('p', 'padding', false);
+
+@include level-up('pl', 'padding-left', 'px');
+
+@include level-up('pr', 'padding-right', 'px');
+
+@include level-up('pt', 'padding-top', 'py');
+
+@include level-up('pb', 'padding-bottom', 'py');
+
+@include media-min-md {
+	@include level-up('p-sm', 'padding', false);
+
+	@include level-up('pl-sm', 'padding-left', 'px-sm');
+
+	@include level-up('pr-sm', 'padding-right', 'px-sm');
+
+	@include level-up('pt-sm', 'padding-top', 'py-sm');
+
+	@include level-up('pb-sm', 'padding-bottom', 'py-sm');
+}
+
+.container-filled {
+	width: 100%;
+	padding: 0 15px;
+	margin: 0 auto;
+}
+
+.container {
+	@extend .container-filled;
+
+	@include media-min-sm {
+		max-width: 540px;
+	}
+
+	@include media-min-md {
+		max-width: 720px;
+	}
+
+	@include media-min-lg {
+		max-width: 960px;
+	}
+
+	@include media-min-xl {
+		max-width: 1140px;
+	}
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	margin-right: -15px;
+	margin-left: -15px;
+}
+
+/* The columning system*/
+[class*='column-'],
+.column {
+	padding-right: 15px;
+	padding-left: 15px;
+	position: relative;
+	width: 100%;
+}
+
+@mixin columns($label) {
+	.column#{$label} {
+		flex-basis: 0;
+		flex-grow: 1;
+		min-width: 0;
+		max-width: 100%;
+	}
+	.column#{$label}-auto {
+		flex: 0 0 auto;
+		width: auto;
+		max-width: 100%;
+	}
+	.column#{$label}-1 {
+		flex: 0 0 8.333333%;
+		max-width: 8.333333%;
+	}
+	.column#{$label}-2 {
+		flex: 0 0 16.666667%;
+		max-width: 16.666667%;
+	}
+	.column#{$label}-3 {
+		flex: 0 0 25%;
+		max-width: 25%;
+	}
+	.column#{$label}-4 {
+		flex: 0 0 33.333333%;
+		max-width: 33.333333%;
+	}
+	.column#{$label}-5 {
+		flex: 0 0 41.666667%;
+		max-width: 41.666667%;
+	}
+	.column#{$label}-6 {
+		flex: 0 0 50%;
+		max-width: 50%;
+	}
+	.column#{$label}-7 {
+		flex: 0 0 58.333333%;
+		max-width: 58.333333%;
+	}
+	.column#{$label}-8 {
+		flex: 0 0 66.666667%;
+		max-width: 66.666667%;
+	}
+	.column#{$label}-9 {
+		flex: 0 0 75%;
+		max-width: 75%;
+	}
+	.column#{$label}-10 {
+		flex: 0 0 83.333333%;
+		max-width: 83.333333%;
+	}
+	.column#{$label}-11 {
+		flex: 0 0 91.666667%;
+		max-width: 91.666667%;
+	}
+	.column#{$label}-12 {
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
+	.offset#{$label}-0 {
+		margin-left: 0;
+	}
+	.offset#{$label}-1 {
+		margin-left: 8.333333%;
+	}
+	.offset#{$label}-2 {
+		margin-left: 16.666667%;
+	}
+	.offset#{$label}-3 {
+		margin-left: 25%;
+	}
+	.offset#{$label}-4 {
+		margin-left: 33.333333%;
+	}
+	.offset#{$label}-5 {
+		margin-left: 41.666667%;
+	}
+	.offset#{$label}-6 {
+		margin-left: 50%;
+	}
+	.offset#{$label}-7 {
+		margin-left: 58.333333%;
+	}
+	.offset#{$label}-8 {
+		margin-left: 66.666667%;
+	}
+	.offset#{$label}-9 {
+		margin-left: 75%;
+	}
+	.offset#{$label}-10 {
+		margin-left: 83.333333%;
+	}
+	.offset#{$label}-11 {
+		margin-left: 91.666667%;
+	}
+}
+
+@include columns('');
+
+@include media-min-sm {
+	@include columns('-sm');
+}
+
+@include media-min-md {
+	@include columns('-md');
+}
+
+@include media-min-lg {
+	@include columns('-lg');
+}
+
+@include media-min-xl {
+	@include columns('-xl');
+}
+
+@mixin generics($label) {
+	.fixed-top#{$label} {
+		position: fixed;
+		top: 0;
+		right: 0;
+		left: 0;
+		z-index: 1030;
+	}
+
+	.fixed-bottom#{$label} {
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 1030;
+	}
+
+	.d-none#{$label} {
+		display: none !important;
+	}
+
+	.d-iblock#{$label} {
+		display: inline-block;
+	}
+
+	.d-block#{$label} {
+		display: block !important;
+	}
+
+	.d-iflex#{$label} {
+		display: inline-flex !important;
+	}
+
+	.d-flex#{$label} {
+		display: flex !important;
+	}
+
+	.flex-row#{$label} {
+		flex-direction: row;
+	}
+
+	.flex-row-reverse#{$label} {
+		flex-direction: row-reverse;
+	}
+
+	.flex-column#{$label} {
+		flex-direction: column;
+	}
+
+	.flex-column-reverse#{$label} {
+		flex-direction: column-reverse;
+	}
+
+	.flex-center#{$label} {
+		justify-content: center !important;
+		align-items: center !important;
+	}
+
+	.flex-center-x#{$label} {
+		justify-content: center !important;
+	}
+
+	.flex-center-y#{$label} {
+		align-items: center !important;
+	}
+
+	.flex-start-y#{$label} {
+		align-items: flex-start !important;
+	}
+
+	.flex-end-y#{$label} {
+		align-items: flex-end !important;
+	}
+
+	.flex-start-x#{$label} {
+		justify-content: flex-start !important;
+	}
+
+	.flex-end-x#{$label} {
+		justify-content: flex-end !important;
+	}
+
+	.flex-spb-x#{$label} {
+		justify-content: space-between !important;
+	}
+
+	.flex-dir-col#{$label} {
+		flex-direction: column;
+	}
+
+	.flex-dir-reverse-col#{$label} {
+		flex-direction: column-reverse;
+	}
+
+	.flex-dir-reverse-row#{$label} {
+		flex-direction: row-reverse;
+    }
+    
+    .flex-order-1#{$label} {
+		order: 1;
+    }
+    
+    .flex-order-2#{$label} {
+		order: 2;
+    }
+    
+    .flex-order-3#{$label} {
+		order: 3;
+    }
+    
+    .flex-order-4#{$label} {
+		order: 4;
+    }
+    
+    .flex-order-5#{$label} {
+		order: 5;
+	}
+
+	.of-auto#{$label} {
+		overflow: auto !important;
+	}
+
+	.of-y-auto#{$label} {
+		overflow-y: auto !important;
+	}
+
+	.of-x-auto#{$label} {
+		overflow-x: auto !important;
+	}
+
+	.of-hidden#{$label} {
+		overflow: hidden !important;
+	}
+
+	.of-y-hidden#{$label} {
+		overflow-y: hidden !important;
+	}
+
+	.of-x-hidden#{$label} {
+		overflow-x: hidden !important;
+	}
+
+	.p-sticky#{$label} {
+		position: -webkit-sticky !important;
+		position: sticky !important;
+	}
+
+	.p-fixed#{$label} {
+		position: fixed !important;
+	}
+
+	.p-relative#{$label} {
+		position: relative !important;
+	}
+
+	.p-absolute#{$label} {
+		position: absolute !important;
+	}
+
+	.p-static#{$label} {
+		position: static !important;
+	}
+
+	.top#{$label}-0 {
+		top: 0;
+	}
+	
+	.left#{$label}-0 {
+		left: 0;
+	}
+
+	.right#{$label}-0 {
+		right: 0;
+	}
+
+	.bottom#{$label}-0 {
+		bottom: 0;
+	}
+
+	.w-100#{$label} {
+		width: 100% !important;
+	}
+
+	.w-75#{$label} {
+		width: 75% !important;
+	}
+
+	.w-50#{$label} {
+		width: 50% !important;
+	}
+
+	.w-25#{$label} {
+		width: 25% !important;
+	}
+
+	.h-100#{$label} {
+		height: 100% !important;
+	}
+
+	.h-75#{$label} {
+		height: 75% !important;
+	}
+
+	.h-50#{$label} {
+		height: 100% !important;
+	}
+
+	.h-25#{$label} {
+		height: 25% !important;
+	}
+
+	.vh-100#{$label} {
+		height: 100vh !important;
+	}
+
+	.vh-75#{$label} {
+		height: 75vh !important;
+	}
+
+	.vh-50#{$label} {
+		height: 100vh !important;
+	}
+
+	.vh-25#{$label} {
+		height: 25vh !important;
+	}
+
+	.t-center#{$label} {
+		text-align: center !important;
+	}
+
+	.img-cover#{$label} {
+		object-fit: cover;
+	}
+
+	.t-size#{$label}-12 {
+		font-size: 12px !important;
+	}
+
+	.t-size#{$label}-13 {
+		font-size: 13px !important;
+	}
+
+	.t-size#{$label}-14 {
+		font-size: 14px !important;
+	}
+
+	.t-size#{$label}-15 {
+		font-size: 15px !important;
+	}
+
+	.t-size#{$label}-16 {
+		font-size: 16px !important;
+	}
+	
+	.t-size#{$label}-17 {
+		font-size: 17px !important;
+	}
+
+	.t-size#{$label}-18 {
+		font-size: 18px !important;
+	}
+
+	.t-size#{$label}-19 {
+		font-size: 19px !important;
+	}
+
+	.t-size#{$label}-20 {
+		font-size: 20px !important;
+	}
+
+	.t-size#{$label}-25 {
+		font-size: 25px !important;
+    }
+
+    .t-size#{$label}-50 {
+		font-size: 50px !important;
+    }
+
+    .t-size#{$label}-100 {
+		font-size: 100px !important;
+    }
+
+    .t-size#{$label}-150 {
+		font-size: 150px !important;
+    }
+    
+    .no-border#{$label} {
+        border: 0 !important;
+    }
+
+    .no-outline#{$label} {
+        outline: 0 !important;
+    }
+}
+
+@include generics('');
+
+@include media-min-sm {
+	@include generics('-sm');
+}
+
+@include media-min-md {
+	@include generics('-md');
+}
+
+@include media-min-before-md {
+	@include generics('-before-md');
+}
+
+@include media-min-lg {
+	@include generics('-lg');
+}
+
+@include media-min-xl {
+	@include generics('-xl');
+}
