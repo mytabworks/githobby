@@ -12,7 +12,8 @@ $placeholder-dark:  darken($text-color-dark, 20);
 $border-dark: lighten($bg-color-dark-dim, 10);
 $disabled-dark: darken($bg-color-dark-dim, 5);
 $text-siluete: #e1e2e4;
-$border-width: 2px;
+$border-width: 1px;
+$border-radius: 2px;
 
 .form-field {
     display: block;
@@ -67,7 +68,7 @@ $border-width: 2px;
 	border: $border-width solid $border-light;
 	-webkit-appearance: none;
     appearance: none;
-    border-radius: 3px;
+    border-radius: $border-radius;
     
     &::placeholder {
         color: $placeholder-light;
@@ -138,13 +139,13 @@ $border-width: 2px;
     }
 
     > .input-group-prepend:first-child {
-        > .input-group-text {
+        > * {
             @include edgy('right')
         }
     }
 
     > .input-group-append:last-child {
-        > .input-group-text {
+        > * {
             @include edgy('left')
         }
     }
