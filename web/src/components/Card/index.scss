@@ -1,0 +1,52 @@
+@import "@styles/variables.scss";
+
+.card {
+    display: block;
+    margin-bottom: 20px;
+
+    &#{&}-primary > &-header {
+        background-color: $primary-color;
+    }
+
+    &#{&}-secondary > &-header {
+        background-color: $secondary-color;
+    }
+
+    &#{&}-success > &-header {
+        background-color: $success-color;
+    }
+
+    &#{&}-danger > &-header {
+        background-color: $danger-color;
+    }
+
+    &#{&}-warning > &-header {
+        background-color: $warning-color;
+    }
+
+    &#{&}-info > &-header {
+        background-color: $info-color;
+    }
+    
+    &#{&}-primary > &-header,
+    &#{&}-secondary > &-header,
+    &#{&}-success > &-header,
+    &#{&}-danger > &-header,
+    &#{&}-warning > &-header,
+    &#{&}-info > &-header {
+        color: #fff;
+    }
+
+    &-header {
+        background-color: $bg-color-dim;
+        padding: 15px 25px;
+        border-radius: 10px 10px 0 0;
+        border-bottom: 1px solid #fff;
+    }
+
+    &-body {
+        background-color: $bg-color-dim;
+        padding: 15px 25px;
+        border-radius: 0 0 10px 10px;
+    }
+}
