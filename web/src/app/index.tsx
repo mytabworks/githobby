@@ -1,12 +1,22 @@
-import React, { FC } from 'react'
+import React, { FunctionComponent } from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Container from '@components/Layout/Container'
+import Navbar from './Navbar'
+import Footer from './Footer'
 
-type Props = {}
+export const App: FunctionComponent = () => {
 
-export const App: FC<Props> = (props) => {
-    React.useEffect(() => {
-        fetch("http://localhost:4000")
-    }, [])
     return (
-        <div>working application</div>
+        <BrowserRouter>
+            <Navbar />
+            <Container className="main">
+                <Switch>
+                    <Route exact path="/">home</Route>
+                    <Route path="/login">login</Route>
+                    <Route path="/register">register</Route>
+                </Switch>
+            </Container>
+            <Footer />
+        </BrowserRouter>
     )
 }
