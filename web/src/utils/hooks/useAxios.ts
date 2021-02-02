@@ -12,8 +12,8 @@ export interface UseAxiosStates<P> {
 export const useAxios = <P = any>(baseurl: string, endpoint: string, options: AxiosRequestConfig = { method: "GET" }) => {
     const [states, setStates] = useState<UseAxiosStates<P>>({
         initial: true,
-        loading: true,
-        complete: false,
+        loading: false,
+        complete: true,
         error: null,
         value: null
     })
@@ -36,7 +36,7 @@ export const useAxios = <P = any>(baseurl: string, endpoint: string, options: Ax
                     initial: false,
                     loading: false, 
                     complete: true, 
-                    value: response
+                    value: response.data
                 }))
                 return response
             })
