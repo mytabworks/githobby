@@ -1,0 +1,80 @@
+@import '@styles/variables.scss';
+
+$variant-text-color: #fff;
+
+.alert {
+    padding: 15px 20px;
+    border-radius: 5px;
+    background-color: #eee;
+    color: rgba(0, 0, 0, 0.65);
+    margin-bottom: 15px;
+
+    &#{&}-primary {
+        background-color: $primary-color;
+        color: $variant-text-color;
+    }
+
+    &#{&}-secondary {
+        background-color: $secondary-color;
+        color: $variant-text-color;
+    }
+
+    &#{&}-danger {
+        background-color: $danger-color;
+        color: $variant-text-color;
+    }
+
+    &#{&}-info {
+        background-color: $info-color;
+        color: $variant-text-color;
+    }
+
+    &#{&}-success {
+        background-color: $success-color;
+        color: $variant-text-color;
+    }
+
+    &#{&}-warning { 
+        background-color: $warning-color;
+        color: $variant-text-color;
+    }
+
+    &-close {
+        float: right;
+        background-color: transparent;
+        border: 0;
+        font-size: 23px;
+        font-weight: 700;
+        line-height: 0.9;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        outline: 0;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    &-enter {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    
+    &-enter-active {
+        opacity: 1;
+        transform: translateX(0);
+        transition: opacity 300ms, transform 300ms;
+    }
+    
+    &-exit {
+        opacity: 1;
+    }
+    
+    &-exit-active {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: opacity 300ms, transform 300ms;
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+        transition: none !important;
+    }
+}
