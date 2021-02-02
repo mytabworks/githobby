@@ -19,7 +19,7 @@ export default class AuthController {
             },
             password: {
                 label: "Password",
-                rules: "required|min:8|max:20"
+                rules: "required"
             },
         }
 
@@ -37,7 +37,10 @@ export default class AuthController {
             const user = await User.where('email', data.email).first()
             
             if(!user.hasItem) {
-                throw Error("Invalid user")
+                return response.status(200).send({
+                    status: "error",
+                    message: "Invalid user"
+                });
             }
             const activity = user.activity().create()
 
@@ -46,7 +49,11 @@ export default class AuthController {
             if(!valid) {
                 activity.description = "you've attempt to login but failed!"
                 await activity.save()
-                throw Error("Incorrect password")
+
+                return response.status(200).send({
+                    status: "error",
+                    message: "Incorrect password"
+                });
             }
 
             activity.description = "you have log in!"
@@ -102,7 +109,10 @@ export default class AuthController {
             const exist = await User.where('email', data.email).first()
 
             if(exist.hasItem) {
-                throw new Error("E-mail was already taken")
+                response.status(200).send({
+                    status: "error",
+                    message: "E-mail was already taken"
+                })
             }
 
             const user = new User()
