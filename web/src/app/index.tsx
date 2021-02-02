@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Container from '@components/Layout/Container'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import Loader from './Loader'
+import { Landing, Login, Registration } from './Pages'
 
 export const App: FunctionComponent = () => {
 
@@ -10,11 +12,13 @@ export const App: FunctionComponent = () => {
         <BrowserRouter>
             <Navbar />
             <Container className="main">
-                <Switch>
-                    <Route exact path="/">home</Route>
-                    <Route path="/login">login</Route>
-                    <Route path="/register">register</Route>
-                </Switch>
+                <React.Suspense fallback={<Loader />}>
+                    <Switch>
+                        <Route exact path="/" component={Landing}/>
+                        <Route path="/login" component={Login}/>
+                        <Route path="/register" component={Registration}/>
+                    </Switch>
+                </React.Suspense>
             </Container>
             <Footer />
         </BrowserRouter>
