@@ -18,7 +18,7 @@ export class User {
     name: string;
 
     @Column("varying character" , { nullable: true })
-    profile_img: string | null;
+    profile_img: string;
 
     @Column()
     password: string;
