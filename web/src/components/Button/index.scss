@@ -2,7 +2,9 @@
 @import "@styles/mixins.scss";
 
 .btn {
-    display: inline-block;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     color: $btn-light-text-color;
     font-size: 16px;
     font-weight: 500;
@@ -15,32 +17,67 @@
 
     &#{&}-primary {
         background-color: $primary-color;
+        &:active {
+            background-color: lighten($primary-color, 10);
+        }
+        &:disabled {
+            background-color: lighten($primary-color, 13%);
+        }
     }
 
     &#{&}-secondary {
         background-color: $secondary-color;
+        &:active {
+            background-color: lighten($secondary-color, 10);
+        }
+        &:disabled {
+            background-color: lighten($secondary-color, 13%);
+        }
     }
 
     &#{&}-success {
         background-color: $success-color;
+        &:active {
+            background-color: lighten($success-color, 10);
+        }
+        &:disabled {
+            background-color: lighten($success-color, 13%);
+        }
     }
 
     &#{&}-danger {
         background-color: $danger-color;
+        &:active {
+            background-color: lighten($danger-color, 10);
+        }
+        &:disabled {
+            background-color: lighten($danger-color, 13%);
+        }
     }
 
     &#{&}-warning {
         background-color: $warning-color;
+        &:active {
+            background-color: lighten($warning-color, 10);
+        }
+        &:disabled {
+            background-color: lighten($warning-color, 13%);
+        }
     }
 
     &#{&}-info {
         background-color: $info-color;
+        &:active {
+            background-color: lighten($info-color, 10);
+        }
+        &:disabled {
+            background-color: lighten($info-color, 13%);
+        }
     }
 
     &#{&}-block {
-        display: block;
+        display: flex;
         width: 100%;
-        text-align: center;
     }
 
     &#{&}-outline {
@@ -76,8 +113,20 @@
         font-size: 20px;
         padding: 15px 20px;
     }
+    
+   &.loading {
+        color: transparent;
+    }
 
     &:disabled {
-        background-color: lighten($primary-color, 13%);
+        background-color: #fcfcfc;
+    }
+
+    .spinner {
+        position: absolute;
+        
+        div {
+            background-color: #fff !important;
+        }
     }
 }
