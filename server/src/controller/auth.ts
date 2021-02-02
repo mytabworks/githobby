@@ -8,6 +8,44 @@ import { UserRole } from '../entity/user'
 
 export default class AuthController {
 
+    public static async getUser(_request: Request, response: Response) {
+        try {
+            const { payload } = response.locals
+
+            if(!payload) {
+                response.status(200).send({
+                    status: "error",
+                    message: "invalid token"
+                });
+            }
+
+            const user = await User.find(payload.uid)
+
+            if(!user.hasItem || payload.token_version !== user.token_version) {
+                response.status(200).send({
+                    status: "error",
+                    message: "invalid token"
+                });
+            }
+
+            return response.status(200).send({
+                status: "ok",
+                user: {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    profile_img: user.profile_img,
+                    roles: (user.roles as any).split(",")
+                } 
+            })
+        } catch(error) {
+            return response.status(500).send({
+                status: "error",
+                message: error.message
+            });
+        }
+    }
+
     public static async login(request: Request, response: Response) {
 
         const data = request.body

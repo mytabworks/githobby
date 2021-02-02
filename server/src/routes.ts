@@ -14,6 +14,8 @@ export default (app: Express) => {
 
     api.post('/registration', AuthController.registration)
 
+    api.get('/user', AuthController.getUser)
+
     api.get('/activities', ActivityController.getAll)
 
     api.get('/activity/:id', ActivityController.get)
