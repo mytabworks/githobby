@@ -28,7 +28,11 @@ export const useAxios = <P = any>(baseurl: string, endpoint: string, options: Ax
             return axios({
                 url: `${baseurl}${endpoint}`,
                 ...options,
-                ...overideOptions
+                ...overideOptions,
+                headers: {
+                    ...options.headers,
+                    ...overideOptions?.headers
+                },
             })
             .then((response: any) => {
                 setStates((prev) => ({
@@ -48,6 +52,7 @@ export const useAxios = <P = any>(baseurl: string, endpoint: string, options: Ax
                     complete: true, 
                     error: error.message
                 }))
+                return error
             })
         }
     }
