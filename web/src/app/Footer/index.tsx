@@ -10,7 +10,7 @@ const Footer: React.FunctionComponent<FooterProps> = (props) => {
     return (
         <footer className="footer">
             <Container>
-                © {new Date().getFullYear()} Mytabworks. All rights reserved.
+                <p>© {new Date().getFullYear()} Mytabworks. All rights reserved.</p>
             </Container>
         </footer>
     )
