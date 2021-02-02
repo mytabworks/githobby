@@ -13,5 +13,5 @@ export const useGithub = (endpoint: string, options?: AxiosRequestConfig) => {
         }
       
     }
-    return useAxios('https://api.github.com', endpoint, { ...defaultOption, ...options})
+    return useAxios(process.env.REACT_APP_GITHUB_API!, endpoint, { ...defaultOption, ...options})
 }
