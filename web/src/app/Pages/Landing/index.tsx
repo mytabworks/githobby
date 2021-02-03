@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import Row from '@components/Layout/Row'
-import Col from '@components/Layout/Col'
-import Container from '@components/Layout/Container'
 import Form from '@components/Form'
 import Button from '@components/Button'
 import Card from '@components/Card'
 import { Variant } from '@components/types'
 import { useGithub } from '@utils/hooks/useGithub'
 import Loader from '@app/Loader'
+import Repository from './Repository'
+import Text from '@components/Text'
 
 const Landing: React.FunctionComponent = () => {
-    const [search, setSearch] = useState<string>('')
-    const request = useGithub(search ? '/search/repositories' : '/repositories')
+    const [search, setSearch] = useState<string>('a')
+    const request = useGithub('/search/repositories')
 
     useEffect(() => {
         request.call({
@@ -29,7 +28,7 @@ const Landing: React.FunctionComponent = () => {
         <div className="pt-5">
             <Form onSubmit={handleSubmit}>
                 <Form.InputGroup>
-                    <Form.Control name="search" defaultValue={search} placeholder="search repository"/>
+                    <Form.Control name="search" placeholder="search repository"/>
                     <Form.InputGroup.Append>
                         <Button className="px-5" variant={Variant.Secondary} loading={request.loading} type="submit">SUBMIT</Button>
                     </Form.InputGroup.Append>
@@ -37,18 +36,14 @@ const Landing: React.FunctionComponent = () => {
             </Form>
             <Card className="mt-4" variant={Variant.Primary}>
                 <Card.Header>
-                    <h3>repository</h3>
+                    <Text as="h3" className="mb-0">repository</Text>
                 </Card.Header>
-                <Card.Body>
-                    <Container className="py-3">
-                        {(search ? request.value?.items : request.value)?.map((item: any) => {
-                            return (
-                                <Row key={item.id}>
-                                    <Col><a href={item.svn_url}>{item?.name}</a></Col>
-                                </Row>
-                            )
-                        })}
-                    </Container>
+                <Card.Body className="py-4">
+                    {request.value?.items?.map((item: any) => {
+                        return (
+                            <Repository key={item.name} item={item} />
+                        )
+                    })}
                     {request.loading && <Loader />}
                 </Card.Body>
             </Card>
