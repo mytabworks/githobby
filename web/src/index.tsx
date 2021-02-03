@@ -7,6 +7,7 @@ import '@utils/rulesExtension';
 import '@styles/index.scss';
 
 const defaultSession = {
+  initial: true,
   loading: true,
   token: "",
   user: null

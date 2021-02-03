@@ -25,6 +25,7 @@ export enum SessionActionType {
 }
 
 export interface SessionState {
+    initial: boolean;
     loading: boolean;
     token: string;
     user: UserProps | null
@@ -40,6 +41,7 @@ const reducer: React.Reducer<SessionState, ReducerAction> = (prev, action) => {
         case SessionActionType.SET_TOKEN:
             return {
                 ...prev,
+                initial: false,
                 token: action.payload
             }
             break;
