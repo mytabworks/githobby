@@ -1,0 +1,40 @@
+@import "@styles/variables";
+
+.text {
+
+    &#{&}-primary {
+        color: $primary-color;
+    }
+
+    &#{&}-secondary {
+        color: $secondary-color;
+    }
+
+    &#{&}-success {
+        color: $success-color;
+    }
+
+    &#{&}-danger {
+        color: $danger-color;
+    }
+
+    &#{&}-warning {
+        color: $warning-color;
+    }
+
+    &#{&}-info {
+        color: $info-color;
+    }
+
+    &#{&}-center {
+        text-align: center;
+    }
+
+    &#{&}-start {
+        text-align: start;
+    }
+
+    &#{&}-end {
+        text-align: end;
+    }
+}
