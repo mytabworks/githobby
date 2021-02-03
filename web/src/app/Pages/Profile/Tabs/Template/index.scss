@@ -1,0 +1,25 @@
+@import "@styles/variables.scss";
+$border-color: #ddd;
+
+.tab-content {
+    position: relative;
+    margin-top: 15px;
+
+    .tab-content-body {
+        position: relative;
+    }
+
+    fieldset {
+        padding: 15px 40px;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 15px;
+        border: 1px solid $border-color;
+        border-radius: 3px;
+    }
+
+    .form-control {
+        border-color: $border-color;
+    }
+    
+}
