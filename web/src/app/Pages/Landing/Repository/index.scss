@@ -1,0 +1,40 @@
+.repository {
+    padding: 20px 0;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid #ddd;
+    }
+
+    &-header {
+        display: flex;
+        justify-content: space-between;
+
+        .stars {
+            padding: 2px 5px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+    }
+
+    &-title {
+        font-size: 19px;
+        margin-bottom: 5px;
+
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+    }
+
+    .circle {
+        position: relative;
+        top: 1px;
+        display: inline-block;
+        height: 12px;
+        width: 12px;
+        border-radius: 50%;
+        background-color: #ddd;
+        margin-right: 4px;
+    }
+}
