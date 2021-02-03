@@ -14,5 +14,30 @@
 		border-radius: $common-radius;
 		cursor: pointer;
 		text-decoration: none;
+
+		&.active {
+			box-shadow: $primary-color 0px 1px;
+		}
+	}
+
+	&-column {
+		flex-direction: column;
+	}
+
+	&-column > #{&}-link {
+		width: 100%;
+		padding: 10px 15px;
+	}
+
+	&-tabs > #{&}-link {
+		background-color: #eee;
+	}
+	
+	&-tabs.nav-column > #{&}-link:not(:first-child) {
+		margin-top: 15px;
+	}
+
+	&-tabs:not(&-column) > #{&}-link:not(:first-child) {
+		margin-left: 15px;
 	}
 }
