@@ -5,6 +5,7 @@ import { createToken, refreshToken, setRefreshToken  } from '../utils/auth'
 import User from '../model/user'
 import { verify } from 'jsonwebtoken'
 import { UserRole } from '../entity/user'
+import fetch from 'node-fetch'
 
 export default class AuthController {
 
@@ -13,7 +14,7 @@ export default class AuthController {
             const { payload } = response.locals
 
             if(!payload) {
-                response.status(200).send({
+                return response.status(200).send({
                     status: "error",
                     message: "invalid token"
                 });
@@ -22,7 +23,7 @@ export default class AuthController {
             const user = await User.find(payload.uid)
 
             if(!user.hasItem || payload.token_version !== user.token_version) {
-                response.status(200).send({
+                return response.status(200).send({
                     status: "error",
                     message: "invalid token"
                 });
@@ -144,10 +145,19 @@ export default class AuthController {
         }
 
         try {
+            const githubUser = await fetch(`https://api.github.com/users/${data.name}`).then(response => response.json())
+
+            if(githubUser.message === "Not Found") {
+                return response.status(200).send({
+                    status: "error",
+                    message: "Username doesn't exist on github"
+                })
+            }
+
             const exist = await User.where('email', data.email).first()
 
             if(exist.hasItem) {
-                response.status(200).send({
+                return response.status(200).send({
                     status: "error",
                     message: "E-mail was already taken"
                 })
@@ -220,7 +230,7 @@ export default class AuthController {
             const { payload } = response.locals
 
             if(!payload) {
-                response.status(200).send({
+                return response.status(200).send({
                     status: "error",
                     message: "can't revoke without a proper token"
                 });
@@ -229,7 +239,7 @@ export default class AuthController {
             const user = await User.find(payload.uid)
 
             if(!user.hasItem || payload.token_version !== user.token_version) {
-                response.status(200).send({
+                return response.status(200).send({
                     status: "error",
                     message: "can't revoke without a proper token"
                 });
