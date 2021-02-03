@@ -46,8 +46,9 @@
 
     &-body {
         position: relative;
-        background-color: $bg-color-dim;
         padding: 15px 25px;
         border-radius: 0 0 10px 10px;
+        border: 1px solid #ddd;
+        border-top: 0;
     }
 }
