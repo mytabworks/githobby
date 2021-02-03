@@ -1,13 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { AxiosResponse } from 'axios'
 import Container from '@components/Layout/Container'
 import Nav from '@components/Nav'
 import Spinner from '@components/Spinner'
 import { SessionActionType, useSession } from '@components/Session'
-import { Link } from 'react-router-dom'
 import { useAuthRequest } from '@utils/hooks/useAuthRequest'
 import icon from '@images/icon.png'
 import './index.scss'
-import { AxiosResponse } from 'axios'
 
 const Navbar: React.FunctionComponent = () => {
     const [{loading, user}, dispatch] = useSession()

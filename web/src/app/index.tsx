@@ -3,12 +3,12 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { UserRole, useSession } from '@components/Session'
 import Container from '@components/Layout/Container'
 import ConditionalRoute from '@components/ConditinalRoute'
+import { useRecieveUser } from '@utils/hooks/useRecieveUser'
+import { useRefreshToken } from '@utils/hooks/useRecieveToken'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import Loader from './Loader'
 import { Landing, Login, NotFound, Profile, Registration } from './Pages'
-import { useRecieveUser } from '@utils/hooks/useRecieveUser'
-import { useRefreshToken } from '@utils/hooks/useRecieveToken'
 
 export const App: FunctionComponent = () => {
     const [{user}] = useSession()
