@@ -8,14 +8,14 @@ export interface LinkProps extends AliasComponentProps {
 const Link: FunctionComponent<LinkProps> = ({as: Component, className, children, ...props}) => {
   
     return (
-        <NavLink className={`nav-link${className ? ` ${className}` : ''}`} {...props}>
+        <Component className={`nav-link${className ? ` ${className}` : ''}`} {...props}>
             {children}
-        </NavLink>
+        </Component>
     )
 }
 
 Link.defaultProps = {
-    as: 'a'
+    as: NavLink
 }
 
 export default memo(Link)
