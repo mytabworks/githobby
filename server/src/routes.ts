@@ -1,5 +1,6 @@
 import { Router, Express } from 'express'
 import AuthController from './controller/auth'
+import UserController from './controller/user'
 import ActivityController from './controller/activity'
 
 export default (app: Express) => {
@@ -14,7 +15,13 @@ export default (app: Express) => {
 
     api.post('/registration', AuthController.registration)
 
-    api.get('/user', AuthController.getUser)
+    api.put('/change_password', AuthController.changePassword)
+
+    api.get('/user', UserController.getUser)
+
+    api.post('/user/delete', UserController.deleteUser)
+
+    api.get('/user/activities', UserController.getUserActivities)
 
     api.get('/activities', ActivityController.getAll)
 
