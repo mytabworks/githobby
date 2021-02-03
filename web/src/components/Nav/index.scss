@@ -1,4 +1,5 @@
 @import '@styles/variables.scss';
+@import '@styles/mixins.scss';
 
 .nav {
 	display: flex;
@@ -37,7 +38,25 @@
 		margin-top: 15px;
 	}
 
-	&-tabs:not(&-column) > #{&}-link:not(:first-child) {
-		margin-left: 15px;
+	@include media-min-md {
+		&-tabs:not(&-column) > #{&}-link:not(:first-child) {
+			margin-left: 15px;
+		}
+	}
+
+	@include media-max-md {
+		&-tabs:not(&-column) {
+			flex-direction: column;
+		}
+
+		&-tabs:not(&-column) > #{&}-link {
+			width: 100%;
+			padding: 10px 15px;
+			margin-top: 15px;
+		}
+
+		&-tabs > #{&}-link {
+			text-align: center;
+		}
 	}
 }
