@@ -1,21 +1,21 @@
+import classNames from '@utils/classNames'
 import React, { FunctionComponent, ReactNode, memo } from 'react'
 import { CSSTransition } from 'react-transition-group'
-import { Variant } from '../types'
+import { Variant, ComponentProps } from '../types'
 import './index.scss'
 
-interface AlertProps {
+interface AlertProps extends ComponentProps {
     in: boolean;
     variant?: Variant;
     dismisible?: boolean;
     dismisibleLabel?: ReactNode;
     onHide?: (event?: any) => void
-    children: ReactNode;
 }
 
-const Alert: FunctionComponent<AlertProps> = ({in: show, variant, dismisible, dismisibleLabel, onHide, children}) => {
+const Alert: FunctionComponent<AlertProps> = ({in: show, variant, dismisible, dismisibleLabel, onHide, className, children}) => {
     return (
         <CSSTransition in={show} classNames="alert" timeout={300} unmountOnExit>
-            <div className={`alert${variant ? ` alert-${variant}` : ''}`}>
+            <div className={classNames('alert', {}, variant && `alert-${variant}`, className)}>
                 {dismisible && <button type="button" className="alert-close" onClick={onHide}>{dismisibleLabel}</button>}
                 {children}
             </div>
