@@ -9,44 +9,6 @@ import fetch from 'node-fetch'
 
 export default class AuthController {
 
-    public static async getUser(_request: Request, response: Response) {
-        try {
-            const { payload } = response.locals
-
-            if(!payload) {
-                return response.status(200).send({
-                    status: "error",
-                    message: "invalid token"
-                });
-            }
-
-            const user = await User.find(payload.uid)
-
-            if(!user.hasItem || payload.token_version !== user.token_version) {
-                return response.status(200).send({
-                    status: "error",
-                    message: "invalid token"
-                });
-            }
-
-            return response.status(200).send({
-                status: "ok",
-                user: {
-                    id: user.id,
-                    name: user.name,
-                    email: user.email,
-                    profile_img: user.profile_img,
-                    roles: (user.roles as any).split(",")
-                } 
-            })
-        } catch(error) {
-            return response.status(500).send({
-                status: "error",
-                message: error.message
-            });
-        }
-    }
-
     public static async login(request: Request, response: Response) {
 
         const data = request.body
@@ -187,6 +149,69 @@ export default class AuthController {
         }
     }
 
+    public static async changePassword(request: Request, response: Response) {
+        const data = request.body
+        const rules = {
+            password: {
+                label: "Password",
+                rules: "required|min:8|max:20"
+            },
+            confirm: {
+                label: "Comfirm Password",
+                rules: "required|same:password@Password"
+            }
+        }
+
+        const validator = Validozer.make(data, rules)
+
+        if(validator.fails()) {
+            const errors = validator.errors().values()
+
+            return response.status(200).send({
+                status: "error",
+                message: [...errors]
+            })
+        }
+        try {
+            const { payload } = response.locals
+
+            if(!payload) {
+                return response.status(200).send({
+                    status: "error",
+                    message: "can't revoke without a proper token"
+                });
+            }
+
+            const user = await User.find(payload.uid)
+
+            if(!user.hasItem || payload.token_version !== user.token_version) {
+                return response.status(200).send({
+                    status: "error",
+                    message: "can't revoke without a proper token"
+                });
+            }
+
+            user.password = await hash(data.password, 12)
+
+            await user.save()
+
+            const activity = user.activity().create()
+
+            activity.description = "you have change your password!"
+
+            await activity.save()
+
+            return response.status(200).send({
+                status: "ok"
+            })
+        } catch(error) {
+            return response.status(500).send({
+                status: "error",
+                message: error.message
+            });
+        }
+    }
+
     public static async refreshToken(request: Request, response: Response) {
         try {
             const token = request.cookies.jsid
@@ -225,7 +250,7 @@ export default class AuthController {
         }
     }
 
-    public static async revokeToken(request: Request, response: Response) {
+    public static async revokeToken(_request: Request, response: Response) {
         try {
             const { payload } = response.locals
 
