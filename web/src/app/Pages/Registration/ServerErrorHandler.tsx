@@ -11,7 +11,7 @@ interface ServerErrorHandlerProps {
 const expectedMessages = ["E-mail was already taken", "Username doesn't exist on github"]
 
 const ServerErrorHandler: React.FunctionComponent<ServerErrorHandlerProps> = ({request}) => {
-    const { setFieldError, dirty } = useFormField()
+    const { setFieldError, dirty, submitted } = useFormField()
     
     useEffect(() => {
         if(request.value?.status === "error" && expectedMessages.includes(request.value?.message)) {
@@ -32,7 +32,7 @@ const ServerErrorHandler: React.FunctionComponent<ServerErrorHandlerProps> = ({r
     return (
         <>
             <Prompt
-                when={dirty}
+                when={dirty && !submitted}
                 message="Are you sure you want to leave?"
                 />
             <Alert variant={Variant.Secondary} in={showError}>
