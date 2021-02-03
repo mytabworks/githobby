@@ -7,13 +7,9 @@ import Button from '@components/Button'
 import Card from '@components/Card'
 import { Variant } from '@components/types'
 import { useGithub } from '@utils/hooks/useGithub'
-import Loader from '../../Loader'
+import Loader from '@app/Loader'
 
-interface LandingProps {
-    
-}
-
-const Landing: React.FunctionComponent<LandingProps> = () => {
+const Landing: React.FunctionComponent = () => {
     const [search, setSearch] = useState<string>('')
     const request = useGithub(search ? '/search/repositories' : '/repositories')
 
@@ -45,7 +41,7 @@ const Landing: React.FunctionComponent<LandingProps> = () => {
                 </Card.Header>
                 <Card.Body>
                     <Container className="py-3">
-                        {(search ? request.value?.data.items : request.value?.data)?.map((item: any) => {
+                        {(search ? request.value?.items : request.value)?.map((item: any) => {
                             return (
                                 <Row key={item.id}>
                                     <Col><a href={item.svn_url}>{item?.name}</a></Col>
