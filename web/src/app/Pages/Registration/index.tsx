@@ -33,7 +33,7 @@ const Register: React.FunctionComponent = () => {
     return (
         <div className="pt-5">
             <Row>
-                <Col sm={{ offset: 1, span: 10}} md={{ offset: 3, span: 6}}>
+                <Col sm={{ offset: 1, span: 10}} lg={{ offset: 3, span: 6}}>
                     <Card className="mt-4" variant={Variant.Primary}>
                         <Card.Header>
                             <h3 className="mb-0">registration</h3>
