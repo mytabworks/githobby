@@ -35,13 +35,13 @@ export const useAxios = <P = any>(baseurl: string, endpoint: string, options: Ax
                 },
             })
             .then((response: any) => {
-                setStates((prev) => ({
-                    ...prev, 
+                setStates({
                     initial: false,
                     loading: false, 
-                    complete: true, 
+                    complete: true,
+                    error: null,
                     value: response.data
-                }))
+                })
                 return response
             })
             .catch((error: Error) => {
