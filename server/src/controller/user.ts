@@ -17,9 +17,9 @@ export default class UserController {
                 });
             }
 
-            const user = await User.find(payload.uid)
+            const admin = await User.find(payload.uid)
 
-            if(!user.hasItem || payload.token_version !== user.token_version || !user.roles?.includes(UserRole.ADMIN)) {
+            if(!admin.hasItem || payload.token_version !== admin.token_version || !admin.roles?.includes(UserRole.ADMIN)) {
                 return response.status(401).send({
                     status: "error",
                     message: "unauthorized access"
@@ -44,7 +44,7 @@ export default class UserController {
                 }, userModel)
             }
 
-            const users = await userModel.paginate(parseInt(page), parseInt(size))
+            const users = await userModel.where('id', '!=', admin.id).paginate(parseInt(page), parseInt(size))
 
             return response.status(200).send({
                 status: "ok",
@@ -88,6 +88,56 @@ export default class UserController {
                     profile_img: user.profile_img,
                     roles: (user.roles as any).split(",")
                 } 
+            })
+        } catch(error) {
+            return response.status(500).send({
+                status: "error",
+                message: error.message
+            });
+        }
+    }
+
+    public static async delete(request: Request, response: Response) {
+        try {
+            const { id } = request.query
+            const { payload } = response.locals
+            
+            if(!payload) {
+                return response.status(401).send({
+                    status: "error",
+                    message: "unauthorized access"
+                });
+            }
+
+            const admin = await User.find(payload.uid)
+
+            if(!admin.hasItem || payload.token_version !== admin.token_version || !admin.roles?.includes(UserRole.ADMIN)) {
+                return response.status(401).send({
+                    status: "error",
+                    message: "unauthorized access"
+                });
+            }
+
+            if(!id) {
+                return response.status(400).send({
+                    status: "error",
+                    message: "undefined id"
+                });
+            }
+
+           const user = await User.find(id as string)
+
+            if(!user.hasItem) {
+                return response.status(400).send({
+                    status: "error",
+                    message: "no user has found"
+                });
+            }
+
+            await user.delete()
+
+            return response.status(200).send({
+                status: "ok"
             })
         } catch(error) {
             return response.status(500).send({
