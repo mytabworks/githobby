@@ -5,6 +5,7 @@ import Col from '@components/Layout/Col'
 import Nav from '@components/Nav'
 import Text from '@components/Text'
 import Icon from '@components/Icon'
+import Alert from '@components/Alert'
 import { useSession } from '@components/Session'
 import { Variant } from '@components/types'
 import { useGithub } from '@utils/hooks/useGithub'
@@ -35,6 +36,13 @@ const Profile: React.FunctionComponent = () => {
     
     return (
         <div className="pt-5">
+            <Alert in={!!requestGitProfile.error} variant={Variant.Danger}>
+                {requestGitProfile.error?.includes("404") ? (
+                    "Your github username doesn't exist."
+                ) : (
+                    requestGitProfile.error
+                )}
+            </Alert>
             <Row>
                 <Col sm={4}>
                     <img width="100%" src={githubProfile?.avatar_url || Facade} />
