@@ -87,7 +87,7 @@ export default class AuthController {
         const rules = {
             name: {
                 label: "Name",
-                rules: "required|alpha_space",
+                rules: "required",
             },
             email: {
                 label: "E-mail",
@@ -115,7 +115,15 @@ export default class AuthController {
         }
 
         try {
-            const githubUser = await fetch(`https://api.github.com/users/${data.name}`).then(response => response.json())
+            let githubUser
+            try {
+                githubUser = await fetch(`https://api.github.com/users/${data.name}`).then(response => response.json())
+            } catch (error) {
+                return response.status(200).send({
+                    status: "error",
+                    message: error.message
+                })
+            }
 
             if(githubUser.message === "Not Found") {
                 return response.status(200).send({
