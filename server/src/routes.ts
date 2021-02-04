@@ -23,7 +23,9 @@ export default (app: Express) => {
 
     api.get('/users', UserController.getPaginated)
 
-    api.post('/user/deactivate', UserController.deactivate)
+    api.delete('/user', UserController.delete)
+
+    api.delete('/user/deactivate', UserController.deactivate)
 
     api.get('/user/activities', UserController.getUserActivities)
 
