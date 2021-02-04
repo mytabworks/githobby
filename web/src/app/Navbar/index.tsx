@@ -1,10 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { AxiosResponse } from 'axios'
 import Container from '@components/Layout/Container'
 import Nav from '@components/Nav'
 import Spinner from '@components/Spinner'
-import { SessionActionType, useSession } from '@components/Session'
+import { SessionActionType, UserRole, useSession } from '@components/Session'
 import { useAuthRequest } from '@utils/hooks/useAuthRequest'
 import icon from '@images/icon.png'
 import './index.scss'
@@ -17,6 +17,7 @@ interface NavbarProps {
 
 const Navbar: React.FunctionComponent<NavbarProps> = ({ brand, brandUrl, filled}) => {
     const [{loading, user}, dispatch] = useSession()
+    const history = useHistory()
     const requestLogout = useAuthRequest('/revoke_token', {
         method: 'POST'
     })
@@ -28,6 +29,7 @@ const Navbar: React.FunctionComponent<NavbarProps> = ({ brand, brandUrl, filled}
                     type: SessionActionType.SET_TOKEN,
                     payload: ""
                 })
+                history.push(user?.roles.includes(UserRole.ADMIN) ? '/admin' : '/')
             }
         })
     }
