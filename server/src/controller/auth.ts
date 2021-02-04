@@ -9,7 +9,15 @@ import fetch from 'node-fetch'
 
 export default class AuthController {
 
-    public static async login(request: Request, response: Response) {
+    public static async clientLogin(request: Request, response: Response) {
+        AuthController.login(request, response, UserRole.ADMIN)
+    }
+
+    public static async adminLogin(request: Request, response: Response) {
+        AuthController.login(request, response, UserRole.CLIENT)
+    }
+
+    public static async login(request: Request, response: Response, role: UserRole) {
 
         const data = request.body
 
@@ -37,7 +45,7 @@ export default class AuthController {
         try {
             const user = await User.where('email', data.email).first()
             
-            if(!user.hasItem) {
+            if(!user.hasItem || user.roles?.includes(role)) {
                 return response.status(200).send({
                     status: "error",
                     message: "Invalid user"
