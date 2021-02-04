@@ -13,6 +13,7 @@ import Facade from '@images/facade'
 import Loader from '@app/Loader'
 import { Settings, Other, Activities } from './Tabs'
 import Fallback from './Tabs/Fallback'
+import { NotFound } from '..'
 
 const Profile: React.FunctionComponent = () => {
     const match = useRouteMatch()
@@ -130,6 +131,9 @@ const Profile: React.FunctionComponent = () => {
                                 </Route>
                                 <Route path={`${match.url}/settings`}>
                                     <Settings />
+                                </Route>
+                                <Route path="*">
+                                    <NotFound />
                                 </Route>
                             </Switch>
                         </Suspense>
