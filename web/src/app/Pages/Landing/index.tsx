@@ -41,7 +41,7 @@ const Landing: React.FunctionComponent = () => {
                 <Card.Body className="py-4">
                     {request.value?.items?.map((item: any) => {
                         return (
-                            <Repository key={item.name} item={item} />
+                            <Repository key={item.id} item={item} />
                         )
                     })}
                     {request.loading && <Loader />}
