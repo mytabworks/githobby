@@ -37,10 +37,10 @@ export default class UserController {
                 userModel = parsedFilters.reduce((userInstance: typeof userModel, filter: any) => {
                     if(Array.isArray(filter.value)) {
                         return filter.value.reduce((uI: typeof userModel, value: string) => {
-                            return uI.where(filter.dataIndex, value)
+                            return uI.where(filter.dataIndex, "LIKE", value)
                         }, userInstance)
                     }
-                    return userInstance.where(filter.dataIndex, filter.value)
+                    return userInstance.where(filter.dataIndex, "LIKE", filter.value)
                 }, userModel)
             }
 
