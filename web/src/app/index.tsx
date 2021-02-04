@@ -8,7 +8,8 @@ import { useRefreshToken } from '@utils/hooks/useRecieveToken'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import Loader from './Loader'
-import { Landing, Login, NotFound, Profile, Registration } from './Pages'
+import Admin from './Admin'
+import {Landing, Login, NotFound, Profile, Registration } from './Pages'
 
 export const App: FunctionComponent = () => {
     const [{user}] = useSession()
@@ -16,25 +17,32 @@ export const App: FunctionComponent = () => {
     useRecieveUser()
     return (
         <BrowserRouter>
-            <Navbar />
-            <Container className="main">
-                <React.Suspense fallback={<Loader />}>
-                    <Switch>
-                        <Route exact path="/" component={Landing}/>
-                        <ConditionalRoute condition={!user} redirectTo="/" path="/login">
-                            <Login/>
-                        </ConditionalRoute>
-                        <ConditionalRoute condition={!user} redirectTo="/" path="/register">
-                            <Registration/>
-                        </ConditionalRoute>
-                        <ConditionalRoute condition={!!user && user.roles.includes(UserRole.CLIENT)} redirectTo="/login" path="/profile">
-                            <Profile/>
-                        </ConditionalRoute>
-                        <Route path="*" component={NotFound}/>
-                    </Switch>
-                </React.Suspense>
-            </Container>
-            <Footer />
+            <Switch>
+                <ConditionalRoute path="/admin" condition={!user || (!!user && user.roles.includes(UserRole.ADMIN))} redirectTo="/">
+                    <Admin />
+                </ConditionalRoute>
+                <ConditionalRoute path="/" condition={!user || (!!user && user.roles.includes(UserRole.CLIENT))} redirectTo="/admin">
+                    <Navbar brand="Githobby" brandUrl="/" />
+                        <Container className="main">
+                            <React.Suspense fallback={<Loader />}>
+                                <Switch>
+                                    <Route exact path="/" component={Landing}/>
+                                    <ConditionalRoute condition={!user} redirectTo="/" path="/login">
+                                        <Login/>
+                                    </ConditionalRoute>
+                                    <ConditionalRoute condition={!user} redirectTo="/" path="/register">
+                                        <Registration/>
+                                    </ConditionalRoute>
+                                    <ConditionalRoute condition={!!user && user.roles.includes(UserRole.CLIENT)} redirectTo="/login" path="/profile">
+                                        <Profile/>
+                                    </ConditionalRoute>
+                                    <Route path="*" component={NotFound}/>
+                                </Switch>
+                            </React.Suspense>
+                        </Container>
+                    <Footer />
+                </ConditionalRoute>
+            </Switch>
         </BrowserRouter>
     )
 }
