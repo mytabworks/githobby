@@ -1,0 +1,17 @@
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 15px;
+    
+    tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+    thead tr {
+        border-width: 2px;
+    }
+
+    th, td {
+        padding: 15px 20px;
+    }
+}
