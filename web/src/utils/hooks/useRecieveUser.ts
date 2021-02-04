@@ -8,12 +8,10 @@ export const useRecieveUser = () => {
     useEffect(() => {
         if(!initial) {
             requestUser.call().then(response => {
-                if(!(response instanceof Error) && ["ok", "error"].includes(response.data?.status)) {
-                    dispatch({ 
-                        type: SessionActionType.SET_USER,
-                        payload: response.data.user || null
-                    })
-                }
+                dispatch({ 
+                    type: SessionActionType.SET_USER,
+                    payload: response.data?.user || null
+                })
             })
         }
     }, [token, initial])
