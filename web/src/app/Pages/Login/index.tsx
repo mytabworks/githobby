@@ -7,6 +7,7 @@ import Input from '@components/FormValidated/Input'
 import Button from '@components/Button'
 import Card from '@components/Card'
 import Alert from '@components/Alert'
+import HeadGear from '@components/HeadGear'
 import { SessionActionType, useSession } from '@components/Session'
 import { Variant } from '@components/types'
 import { useRequest } from '@utils/hooks/useRequest'
@@ -34,6 +35,10 @@ const Login: React.FunctionComponent = () => {
     
     return (
         <div className="pt-5">
+            <HeadGear
+                title="Githobby | Login"
+                description="githobby login"
+                />
             <Row>
                 <Col sm={{ offset: 1, span: 10}} lg={{ offset: 3, span: 6}}>
                     <Card className="mt-4" variant={Variant.Primary}>
