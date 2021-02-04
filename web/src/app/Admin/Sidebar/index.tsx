@@ -6,7 +6,7 @@ import Nav from '@components/Nav'
 const Sidebar: React.FunctionComponent = (props) => {
     const {url} = useRouteMatch()
     return (
-        <Nav tabs column>
+        <Nav className="mt-3" tabs column>
             <Nav.Link exact to={url}>
                 <Icon name="chart-line"/> Dashboard
             </Nav.Link>
