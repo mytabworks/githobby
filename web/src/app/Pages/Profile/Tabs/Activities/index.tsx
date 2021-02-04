@@ -24,7 +24,7 @@ const Activities: React.FunctionComponent<ActivitiesProps> = (props) => {
             {request.value?.data.length ? (
                     request.value?.data.map((activity: any) => {
                         return (
-                            <Alert className="d-flex flex-spb-x" in={true} variant={Variant.Success}>
+                            <Alert key={activity.id} className="d-flex flex-spb-x" in={true} variant={Variant.Success}>
                                 <Text as="span">
                                     {activity.description}
                                 </Text>
