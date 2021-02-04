@@ -9,7 +9,13 @@ import { useAuthRequest } from '@utils/hooks/useAuthRequest'
 import icon from '@images/icon.png'
 import './index.scss'
 
-const Navbar: React.FunctionComponent = () => {
+interface NavbarProps {
+    brand: string;
+    brandUrl: string;
+    filled?: boolean;
+}
+
+const Navbar: React.FunctionComponent<NavbarProps> = ({ brand, brandUrl, filled}) => {
     const [{loading, user}, dispatch] = useSession()
     const requestLogout = useAuthRequest('/revoke_token', {
         method: 'POST'
@@ -27,8 +33,8 @@ const Navbar: React.FunctionComponent = () => {
     }
     return (
         <div className="navbar fixed-top">
-            <Container>
-                <Link to="/" className="brand"><img src={icon} alt="githobby" /> <span>GitHobby</span></Link>
+            <Container filled={filled}>
+                <Link to={brandUrl} className="brand"><img src={icon} alt="githobby" /> <span>{brand}</span></Link>
                 <Nav className="ml-auto">
                     {loading ? (
                         <Spinner/>
