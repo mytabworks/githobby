@@ -27,7 +27,7 @@ interface FilterProps {
 
 interface SortProps {
 	dataIndex: string;
-	sortOrder: SortOrder[];
+	sortOrder?: SortOrder[];
 	render: (sort: SortOrder | null) => React.ReactNode;
 }
 
@@ -41,7 +41,7 @@ interface TableStates {
 
 interface TableReturn extends TableStates {
 	filterProps: HookFunction<FilterProps>;
-	filterSubmit: HookFunction<any, void>;
+	filterSubmit: HookFunction<void, void>;
 	sortProps: HookFunction<SortProps>;
 	paginateProps: HookFunction<number>;
 }
