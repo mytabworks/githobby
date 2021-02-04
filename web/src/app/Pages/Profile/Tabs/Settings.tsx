@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { FormEventType, FormProvider } from 'formydable'
 import Text from '@components/Text'
-import { Variant } from '@components/types'
 import Input from '@components/FormValidated/Input'
 import Button from '@components/Button'
+import Alert from '@components/Alert'
+import HeadGear from '@components/HeadGear'
+import { Variant } from '@components/types'
 import { SessionActionType, useSession } from '@components/Session'
 import { useAuthRequest } from '@utils/hooks/useAuthRequest'
 import Template from './Template'
-import Alert from '@components/Alert'
 
 const Settings: React.FunctionComponent = () => {
     const [, dispatch] = useSession()
@@ -15,8 +16,8 @@ const Settings: React.FunctionComponent = () => {
     const requestChangePass = useAuthRequest('/change_password', {
         method: "PUT"
     })
-    const requestDelteAccount = useAuthRequest('/user/delete', {
-        method: "POST"
+    const requestDelteAccount = useAuthRequest('/user/deactivate', {
+        method: "DELETE"
     })
     
     const handleChangePassword = (event: FormEventType) => {
@@ -38,11 +39,19 @@ const Settings: React.FunctionComponent = () => {
         const value = prompt("please type `YES` to proceed because this will be a permanent action")
         if(value === "YES") {
             requestDelteAccount.call()
-            .then(() => dispatch({
-                type: SessionActionType.SET_TOKEN,
-                payload: ""
-            }))
-            .then(() => alert("account is permanently deleted. you will be redirect shortly."))
+            .then((response) => {
+                if(response instanceof Error) {
+                    alert(response.message)
+                    return false
+                } else {
+                    dispatch({
+                        type: SessionActionType.SET_TOKEN,
+                        payload: ""
+                    })
+                    return true
+                }
+            })
+            .then((ok) => ok && alert("account is permanently deleted. you will be redirect shortly."))
             
         } else {
             alert("action canceled")
@@ -51,6 +60,10 @@ const Settings: React.FunctionComponent = () => {
 
     return (
         <Template icon="star-full" title="Settings">
+            <HeadGear
+                title="Githobby | Settings"
+                description="githobby settings"
+                />
             <fieldset>
                 <Text as="legend" variant={Variant.Success}>Change Password</Text>
                 <Alert in={!!message} dismisible onHide={() => setMessage("")} variant={Variant.Success}>
