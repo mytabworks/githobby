@@ -7,29 +7,25 @@ export default (app: Express) => {
 
     const api = Router()
 
+    api.post('/admin/login', AuthController.adminLogin)
+
+    api.post('/login', AuthController.clientLogin)
+
     api.post('/refresh_token', AuthController.refreshToken)
 
     api.post('/revoke_token', AuthController.revokeToken)
-
-    api.post('/login', AuthController.login)
 
     api.post('/registration', AuthController.registration)
 
     api.put('/change_password', AuthController.changePassword)
 
-    api.get('/user', UserController.getUser)
+    api.get('/user', UserController.get)
 
-    api.post('/user/delete', UserController.deleteUser)
+    api.get('/users', UserController.getPaginated)
+
+    api.post('/user/deactivate', UserController.deactivate)
 
     api.get('/user/activities', UserController.getUserActivities)
-
-    api.get('/activities', ActivityController.getAll)
-
-    api.get('/activity/:id', ActivityController.get)
-
-    api.put('/activity/:id', ActivityController.update)
-
-    api.delete('/activity/:id', ActivityController.delete)
 
     app.use('/api', api)
 }
