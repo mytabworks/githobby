@@ -6,6 +6,7 @@ import Col from '@components/Layout/Col'
 import Input from '@components/FormValidated/Input'
 import Button from '@components/Button'
 import Card from '@components/Card'
+import HeadGear from '@components/HeadGear'
 import { Variant } from '@components/types'
 import { useRequest } from '@utils/hooks/useRequest'
 import ServerErrorHandler from './ServerErrorHandler'
@@ -32,6 +33,10 @@ const Register: React.FunctionComponent = () => {
     
     return (
         <div className="pt-5">
+            <HeadGear
+                title="Githobby | Registration"
+                description="githobby registration"
+                />
             <Row>
                 <Col sm={{ offset: 1, span: 10}} lg={{ offset: 3, span: 6}}>
                     <Card className="mt-4" variant={Variant.Primary}>

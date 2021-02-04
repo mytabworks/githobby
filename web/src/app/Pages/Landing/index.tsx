@@ -4,9 +4,10 @@ import Button from '@components/Button'
 import Card from '@components/Card'
 import { Variant } from '@components/types'
 import { useGithub } from '@utils/hooks/useGithub'
+import Text from '@components/Text'
+import HeadGear from '@components/HeadGear'
 import Loader from '@app/Loader'
 import Repository from './Repository'
-import Text from '@components/Text'
 
 const Landing: React.FunctionComponent = () => {
     const [search, setSearch] = useState<string>('a')
@@ -26,6 +27,10 @@ const Landing: React.FunctionComponent = () => {
     }
     return (
         <div className="pt-5">
+            <HeadGear
+                title="Githobby | Search"
+                description="Githobby is a github search engine"
+                />
             <Form onSubmit={handleSubmit}>
                 <Form.InputGroup>
                     <Form.Control name="search" placeholder="search repository"/>

@@ -3,7 +3,7 @@ import Template from './Template'
 import { useGithub } from '@utils/hooks/useGithub'
 import Loader from '@app/Loader'
 import Repository from '@app/Pages/Landing/Repository'
-import Text from '@components/Text'
+import HeadGear from '@components/HeadGear'
 
 interface OtherProps {
     title: string;
@@ -14,6 +14,10 @@ interface OtherProps {
 const Other: React.FunctionComponent<OtherProps> = ({ title, request, fallback }) => {
     return (
         <Template icon="star-full" title={title}>
+            <HeadGear
+                title={`Githobby | ${title}`}
+                description={`githobby ${title}`}
+                />
             {request.value && request.value.length ? (
                     request.value?.map((item: any) => {
                         return (

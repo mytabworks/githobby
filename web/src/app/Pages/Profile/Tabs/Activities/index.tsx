@@ -1,10 +1,11 @@
-import Loader from '@app/Loader'
+import React, { useEffect } from 'react'
 import Alert from '@components/Alert'
+import HeadGear from '@components/HeadGear'
 import Text from '@components/Text'
 import { Variant } from '@components/types'
 import diffForHuman from '@utils/diffForHuman'
 import { useAuthRequest } from '@utils/hooks/useAuthRequest'
-import React, { useEffect } from 'react'
+import Loader from '@app/Loader'
 import Fallback from '../Fallback'
 import Template from '../Template'
 
@@ -21,6 +22,10 @@ const Activities: React.FunctionComponent<ActivitiesProps> = (props) => {
 
     return (
         <Template icon="star-full" title="Activities">
+            <HeadGear
+                title="Githobby | Activities"
+                description="githobby activities"
+                />
             {request.value?.data.length ? (
                     request.value?.data.map((activity: any) => {
                         return (

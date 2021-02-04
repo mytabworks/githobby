@@ -3,9 +3,10 @@ import { FormEventType, FormProvider } from 'formydable'
 import Input from '@components/FormValidated/Input'
 import Button from '@components/Button'
 import Card from '@components/Card'
+import Text from '@components/Text'
+import HeadGear from '@components/HeadGear'
 import { SessionActionType, useSession } from '@components/Session'
 import { Variant } from '@components/types'
-import Text from '@components/Text'
 import icon from '@images/icon-150x150.png'
 import { useRequest } from '@utils/hooks/useRequest'
 import ServerErrorHandler from '@app/Pages/Login/ServerErrorHandler'
@@ -32,6 +33,10 @@ const Login: React.FunctionComponent = () => {
     
     return (
         <div className="admin-login">
+            <HeadGear
+                title="Githobby | Admin - Login"
+                description=""
+                />
             <Card variant={Variant.Primary}>
                 <Card.Body className="admin-form">
                     <Text as="p" align="center">
