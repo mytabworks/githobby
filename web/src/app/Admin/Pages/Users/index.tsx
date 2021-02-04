@@ -167,6 +167,7 @@ const Users: React.FunctionComponent = () => {
                         const pageNumber = index + 1
                         return (
                             <Button 
+                                key={pageNumber}
                                 className="px-3 mr-1" 
                                 size="sm" 
                                 variant={page === pageNumber? Variant.Secondary : Variant.Primary} 
