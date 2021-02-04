@@ -590,7 +590,31 @@
 
     .t-size#{$label}-150 {
 		font-size: 150px !important;
-    }
+	}
+	
+	.pre#{$label} {
+		white-space: pre;
+	}
+
+	.no-wrap#{$label} {
+		white-space: nowrap;
+	}
+
+	.pre-line#{$label} {
+		white-space: pre-line;
+	}
+
+	.pre-wrap#{$label} {
+		white-space: pre-wrap
+	}
+
+	.break-all#{$label} {
+		word-break: break-all;
+	}
+
+	.cursor-pointer#{$label} {
+		cursor: pointer;
+	}
     
     .no-border#{$label} {
         border: 0 !important;
