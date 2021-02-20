@@ -8,8 +8,8 @@ interface HeadGearProps {
 }
 
 const HeadGear: React.FunctionComponent<HeadGearProps> = ({ title, description, type}) => {
-    const url = window?.location.href
-    const image = `${window?.location.origin}/icons/icon-192x192.png`
+    const url = process.env.REACT_APP_PUBLIC_URL
+    const image = `${url}/icons/icon-192x192.png`
     return ReactDOM.createPortal(
         <>
             <title>{title}</title>
