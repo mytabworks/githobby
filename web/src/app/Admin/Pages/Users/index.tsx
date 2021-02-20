@@ -48,7 +48,7 @@ const Users: React.FunctionComponent = () => {
                         ) : order === SortOrder.DESC ? (
                             <>&#8595;</>
                         ) : (
-                            <>&#10572;</>
+                            <>&#8693;</>
                         )}
                     </span>
                 )})}/>
@@ -105,7 +105,7 @@ const Users: React.FunctionComponent = () => {
                             <THSotable title="EMAIL" dataIndex="email" />
                             <th>ROLES</th>
                             <THSotable title="CREATED" dataIndex="created_at" />
-                            <th>ACTION</th>
+                            <th><span className="d-flex flex-end-x">ACTION</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -119,7 +119,7 @@ const Users: React.FunctionComponent = () => {
                                         <td>{row.roles}</td>
                                         <td>{diffForHuman(row.created_at)}</td>
                                         <td>
-                                            <span className="d-flex flex-center-x">
+                                            <span className="d-flex flex-end-x">
                                                 <Button variant={Variant.Danger} size="xs" onClick={() => {
                                                     if(window.confirm(`are you sure you want to delete ${row.name}`)) {
                                                         deleteRequest.call({
@@ -159,7 +159,7 @@ const Users: React.FunctionComponent = () => {
                         className="px-3 mr-1" 
                         size="sm" 
                         variant={Variant.Primary}
-                        disabled={page === 1} 
+                        disabled={page <= 1} 
                         {...paginateProps(page - 1)}>
                             <Icon name="arrow-left"/>
                     </Button>
@@ -180,7 +180,7 @@ const Users: React.FunctionComponent = () => {
                         className="px-3 mr-1" 
                         size="sm" 
                         variant={Variant.Primary}
-                        disabled={page === totalPage} 
+                        disabled={page >= totalPage} 
                         {...paginateProps(page - 1)}>
                             <Icon name="arrow-right"/>
                     </Button>
