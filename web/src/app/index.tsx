@@ -12,17 +12,20 @@ import Admin from './Admin'
 import {Landing, Login, NotFound, Profile, Registration } from './Pages'
 
 export const App: FunctionComponent = () => {
-    const [{user}] = useSession()
+    const [{user, loading}] = useSession()
     useRefreshToken()
     useRecieveUser()
     return (
         <BrowserRouter>
-            <Switch>
-                <ConditionalRoute path="/admin" condition={!user || (!!user && user.roles.includes(UserRole.ADMIN))} redirectTo="/">
-                    <Admin />
-                </ConditionalRoute>
-                <ConditionalRoute path="/" condition={!user || (!!user && user.roles.includes(UserRole.CLIENT))} redirectTo="/admin">
-                    <Navbar brand="Githobby" brandUrl="/" />
+            {loading ? (
+                <Loader />
+            ) : (
+                <Switch>
+                    <ConditionalRoute path="/admin" condition={!user || (!!user && user.roles.includes(UserRole.ADMIN))} redirectTo="/">
+                        <Admin />
+                    </ConditionalRoute>
+                    <ConditionalRoute path="/" condition={!user || (!!user && user.roles.includes(UserRole.CLIENT))} redirectTo="/admin">
+                        <Navbar brand="Githobby" brandUrl="/" />
                         <Container className="main">
                             <React.Suspense fallback={<Loader />}>
                                 <Switch>
@@ -40,9 +43,10 @@ export const App: FunctionComponent = () => {
                                 </Switch>
                             </React.Suspense>
                         </Container>
-                    <Footer />
-                </ConditionalRoute>
-            </Switch>
+                        <Footer />
+                    </ConditionalRoute>
+                </Switch>
+            )}
         </BrowserRouter>
     )
 }
