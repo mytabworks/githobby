@@ -25,7 +25,7 @@ const Settings: React.FunctionComponent = () => {
             requestChangePass.call({
                 data: event.json()
             }).then((response) => {
-                if(!(response instanceof Error)) {
+                if(response.data.status !== "error") {
                     event.reset()
                     setMessage("Successfully change your password")
                 }
@@ -40,8 +40,8 @@ const Settings: React.FunctionComponent = () => {
         if(value === "YES") {
             requestDelteAccount.call()
             .then((response) => {
-                if(response instanceof Error) {
-                    alert(response.message)
+                if(response.data.status === "error") {
+                    alert(response.data.message)
                     return false
                 } else {
                     dispatch({
