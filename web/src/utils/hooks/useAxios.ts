@@ -44,7 +44,7 @@ export const useAxios = <P = any>(baseurl: string, endpoint: string, options: Ax
                 })
                 return response
             })
-            .catch((error: Error) => {
+            .catch((error) => {
                 setStates((prev) => ({
                     ...prev, 
                     initial: false,
@@ -52,7 +52,7 @@ export const useAxios = <P = any>(baseurl: string, endpoint: string, options: Ax
                     complete: true, 
                     error: error.message
                 }))
-                return error
+                return error.response
             })
         }
     }
