@@ -10,7 +10,7 @@ export const useRefreshToken = () => {
     useEffect(() => {
         const callback = () => {
             requestToken.call().then(response => {
-                if(!(response instanceof Error)) {
+                if(response.data.status === "ok") {
                     dispatch({ 
                         type: SessionActionType.SET_TOKEN,
                         payload: response.data.accessToken
