@@ -27,8 +27,7 @@
 	font-variant: normal;
 	text-transform: none;
 
-	/* fix buttons height, for twitter bootstrap */
-	line-height: 1em;
+	line-height: inherit;
 
 	/* Animation center compensation - margins should be symmetric */
 	/* remove if not needed */
