@@ -7,12 +7,19 @@ export const useRecieveUser = () => {
     const requestUser = useAuthRequest('/user')
     useEffect(() => {
         if(!initial) {
-            requestUser.call().then(response => {
+            if(token) {
+                requestUser.call().then(response => {
+                    dispatch({ 
+                        type: SessionActionType.SET_USER,
+                        payload: response.data?.user || null
+                    })
+                })
+            } else {
                 dispatch({ 
                     type: SessionActionType.SET_USER,
-                    payload: response.data?.user || null
+                    payload: null
                 })
-            })
+            }
         }
     }, [token, initial])
 }
