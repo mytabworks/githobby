@@ -1,12 +1,9 @@
 import React, { FunctionComponent, memo } from 'react';
-import { ComponentProps } from '../types';
 
-export type RowProps = ComponentProps
-
-const Row: FunctionComponent<RowProps> = ({className, children}) => {
+const Row: FunctionComponent<React.HTMLProps<HTMLDivElement>> = ({className, children, ...props}) => {
     
     return (
-        <div className={`row${className ? ` ${className}` : ''}`}>
+        <div className={`row${className ? ` ${className}` : ''}`} {...props}>
             {children}
         </div>
     )

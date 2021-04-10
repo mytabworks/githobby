@@ -1,0 +1,29 @@
+.collapse {
+    display: none;
+    transition: height 700ms ease-in-out;
+    overflow: hidden;
+
+    &#{&}-slow {
+        transition: height 1000ms ease-in-out;
+    }
+
+    &#{&}-slower {
+        transition: height 1500ms ease-in-out;
+    }
+
+    &#{&}-fast {
+        transition: height 300ms ease-in-out;
+    }
+
+    &#{&}-faster {
+        transition: height 150ms ease-in-out;
+    }
+
+    &.show{
+
+        &:not(.transition) {
+            display: block;
+            overflow: none;
+        }
+    }
+}

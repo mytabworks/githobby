@@ -37,7 +37,7 @@ const Login: React.FunctionComponent = () => {
                 title="Githobby | Admin - Login"
                 description=""
                 />
-            <Card variant={Variant.Primary}>
+            <Card variant={Variant.PRIMARY}>
                 <Card.Body className="admin-form">
                     <Text as="p" align="center">
                         <img src={icon} alt="githobby" />
@@ -46,7 +46,7 @@ const Login: React.FunctionComponent = () => {
                         <ServerErrorHandler request={request} />
                         <Input name="email" label="E-mail" rules="required|email" placeholder="enter your email..." disabled={request.loading}/>
                         <Input name="password" label="Password" rules="required" placeholder="enter your password..." type="password" disabled={request.loading}/>
-                        <Button block variant={Variant.Secondary} type="submit" className="mt-5" loading={request.loading}>SUBMIT</Button>
+                        <Button block variant={Variant.SECONDARY} type="submit" className="mt-5" loading={request.loading}>SUBMIT</Button>
                     </FormProvider>
                 </Card.Body>
             </Card>

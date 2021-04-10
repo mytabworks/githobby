@@ -1,17 +1,16 @@
 import React, { FunctionComponent, memo } from 'react';
-import { ComponentProps } from '../types';
 import is from '../../utils/is';
 
 type SizeTypes = { span: number, offset: number } | number
 
-export interface ColProps extends ComponentProps {
+export interface ColProps extends React.HTMLProps<HTMLDivElement> {
     xs?: SizeTypes;
     sm?: SizeTypes;
     md?: SizeTypes;
     lg?: SizeTypes;
 }
 
-const Col: FunctionComponent<ColProps> = ({xs, sm, md, lg, className, children}) => {
+const Col: FunctionComponent<ColProps> = ({xs, sm, md, lg, className, children, ...props}) => {
 
     const strxs: string = xs ? is.obj(xs) ? `column-xs-${(xs as any).span} offset-xs-${(xs as any).offset}` : `column-xs-${xs}` : ''
     const strsm: string = sm ? is.obj(sm) ? ` column-sm-${(sm as any).span} offset-sm-${(sm as any).offset}` : ` column-sm-${sm}` : ''
@@ -21,7 +20,8 @@ const Col: FunctionComponent<ColProps> = ({xs, sm, md, lg, className, children})
     return (
         <div className={`${strxs || strsm || strmd || strlg 
             ? `${strxs}${strsm}${strmd}${strlg}`.trim()
-            : 'column'}${className ? ` ${className}`: ''}`}>
+            : 'column'}${className ? ` ${className}`: ''}`}
+            {...props}>
             {children}
         </div>
     )

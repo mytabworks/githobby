@@ -1,25 +1,34 @@
 import { useState } from "react";
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 export interface UseAxiosStates<P> {
     initial: boolean;
     loading: boolean;
     complete: boolean;
+    success: string | null;
     error: string | null;
-    value: P | null
+    response: P | null
 }
 
-export const useAxios = <P = any>(baseurl: string, endpoint: string, options: AxiosRequestConfig = { method: "GET" }) => {
+export interface UseAxiosReturn<P> extends UseAxiosStates<P> {
+    call: (overideOptions?: AxiosRequestConfig) => Promise<AxiosResponse<P>>,
+    setError: (error: string | null) => void,
+    setSuccess: (error: string | null) => void,
+    setResponse: (error: string | null) => void,
+}
+
+export const useAxios = <P = any>(baseurl: string, endpoint: string, options: AxiosRequestConfig = { method: "POST" }) => {
     const [states, setStates] = useState<UseAxiosStates<P>>({
         initial: true,
         loading: false,
         complete: true,
         error: null,
-        value: null
+        success: null,
+        response: null
     })
     return {
         ...states,
-        call(overideOptions?: AxiosRequestConfig) {
+        call(overideOptions?: AxiosRequestConfig): Promise<AxiosResponse<P>> {
             setStates((prev) => ({
                 ...prev, 
                 loading: true, 
@@ -34,14 +43,16 @@ export const useAxios = <P = any>(baseurl: string, endpoint: string, options: Ax
                     ...overideOptions?.headers
                 },
             })
-            .then((response: any) => {
-                setStates({
+            .then((response) => {
+                setStates((prev) => ({
+                    ...prev,
                     initial: false,
                     loading: false, 
                     complete: true,
                     error: null,
-                    value: response.data
-                })
+                    success: null,
+                    response: response.data
+                }))
                 return response
             })
             .catch((error) => {
@@ -50,10 +61,29 @@ export const useAxios = <P = any>(baseurl: string, endpoint: string, options: Ax
                     initial: false,
                     loading: false, 
                     complete: true, 
+                    success: null,
                     error: error.message
                 }))
-                return error.response
+                return Promise.reject(error)
             })
+        },
+        setError(error: string | null) {
+            setStates((prev) => ({
+                ...prev,
+                error,
+            }))
+        },
+        setSuccess(success: string | null) {
+            setStates((prev) => ({
+                ...prev,
+                success,
+            }))
+        },
+        setResponse(response: P | null) {
+            setStates((prev) => ({
+                ...prev,
+                response,
+            }))
         }
     }
 }

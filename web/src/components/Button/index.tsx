@@ -1,11 +1,11 @@
 import React, { FunctionComponent, memo } from 'react'
-import { AliasComponentProps, Variant } from '../types'
+import { AliasFunction, AliasProps, Variant } from '../types'
 import Spinner from '../Spinner'
 import classNames from '@utils/classNames'
 import './index.scss'
 
 
-interface ButtonProps extends AliasComponentProps {
+interface ButtonProps extends AliasProps {
     variant?: Variant;
     size?: 'xs' | 'sm' | 'lg';
     outline?: boolean;
@@ -13,7 +13,7 @@ interface ButtonProps extends AliasComponentProps {
     loading?: boolean;
 }
 
-const Button: FunctionComponent<ButtonProps> = ({ as: Component, className, children, variant, size, outline, block, loading, ...rest}) => {
+const Button: AliasFunction<'button', ButtonProps> = ({ as: Component = 'button', className, children, variant, size, outline, block, loading, ...rest}) => {
     return (
         <Component 
           className={classNames('btn', {
@@ -35,7 +35,6 @@ const Button: FunctionComponent<ButtonProps> = ({ as: Component, className, chil
 }
 
 Button.defaultProps = {
-    as: 'button',
     loading: false
 }
 

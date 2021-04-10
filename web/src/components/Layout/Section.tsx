@@ -1,14 +1,13 @@
 import React, { FunctionComponent, memo } from 'react';
-import { ComponentProps } from '../types';
 
-export interface SectionProps extends ComponentProps {
+export interface SectionProps extends React.HTMLProps<HTMLElement> {
     id?: string;
 }
 
-const Section: FunctionComponent<SectionProps> = ({id, className, children}) => {
+const Section: FunctionComponent<SectionProps> = ({id, className, children, ...props}) => {
     
     return (
-        <section id={id} className={`section${className ? ` ${className}` : ''}`}>
+        <section id={id} className={`section${className ? ` ${className}` : ''}`} {...props}>
             {children}
         </section>
     )
